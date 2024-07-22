@@ -1,0 +1,25 @@
+name: Deploy to Nginx
+
+on:
+  push:
+    branches:
+      - main  # Pokreće se na push na main granu
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan your_server_ip >> ~/.ssh/known_hosts
+
+    - name: Deploy to server
+      run: |
+        ssh korisnik@server_ip "cd /putanja/do/vas/web/direktorijuma && git pull origin main"
