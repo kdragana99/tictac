@@ -22,7 +22,7 @@ jobs:
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.5.3
         with:
-          ssh-private-key: ${{ secrets.tictac-deploykey }}
+          ssh-private-key: ${{ tictac-deploykey }}
 
       - name: Install Nginx on Server
         run: |
