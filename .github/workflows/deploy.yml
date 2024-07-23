@@ -21,7 +21,7 @@ jobs:
       - name: Deploy to Server
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa root@185.65.120.195 << 'EOF'
-             set -e
+            set -e
             echo "Connected to server"
             cd /var/www/tictac
             echo "Current directory: $(pwd)"
