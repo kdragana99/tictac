@@ -1,4 +1,4 @@
-name: Install Nginx on Servers in multiple
+name: Install Nginx on Servers
 
 on:
   push:
@@ -26,4 +26,5 @@ jobs:
 
       - name: Install Nginx on Server
         run: |
-          ssh -i ~/.ssh/id_rsa  -o StrictHostKeyChecking=no suresh@${{ matrix.server_ip }} 'sudo apt-get update && sudo apt-get install -y nginx'
+          echo "Installing Nginx on server with IP: ${{ matrix.server_ip }}"
+          ssh -o StrictHostKeyChecking=no suresh@${{ matrix.server_ip }} 'sudo apt-get update && sudo apt-get install -y nginx'
