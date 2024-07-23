@@ -1,4 +1,4 @@
-name: Install Nginx on Servers
+name: Deploy to Server
 
 on:
   push:
@@ -9,12 +9,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        server_ip:
-          - 185.65.120.195
-          # Add more server IP addresses as needed
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -24,7 +18,10 @@ jobs:
         with:
           ssh-private-key: ${{ tictac-deploykey }}
 
-      - name: Install Nginx on Server
+      - name: Deploy to Server
         run: |
-          echo "Installing Nginx on server with IP: ${{ matrix.server_ip }}"
-          ssh -o StrictHostKeyChecking=no suresh@${{ matrix.server_ip }} 'sudo apt-get update && sudo apt-get install -y nginx'
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa root@185.65.120.195 << 'EOF'
+            cd /var/www/tictac
+            git fetch origin
+            git reset --hard origin/master
+          EOF
