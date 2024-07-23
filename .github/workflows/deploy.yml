@@ -1,0 +1,27 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ tictac-deploykey }}
+
+      - name: Deploy to Server
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa root@185.65.120.195 << 'EOF'
+            cd /var/www/tictac
+            git fetch origin
+            git reset --hard origin/master
+          EOF
