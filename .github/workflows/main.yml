@@ -1,0 +1,29 @@
+name: Install Nginx on Servers in multiple
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        server_ip:
+          - 185.65.120.195
+          # Add more server IP addresses as needed
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install Nginx on Server
+        run: |
+          ssh -i ~/.ssh/id_rsa  -o StrictHostKeyChecking=no suresh@${{ matrix.server_ip }} 'sudo apt-get update && sudo apt-get install -y nginx'
