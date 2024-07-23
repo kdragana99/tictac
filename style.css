@@ -7,10 +7,10 @@
 }
 ::selection{
   color: #fff;
-  background:#2f00ff;
+  background:#010003;
 }
 body{
-  background:#2f00ff;
+  background:#010003;
 }
 .select-box, .play-board, .result-box{
   position: absolute;
@@ -51,7 +51,7 @@ body{
   font-weight: 500;
   padding: 10px 0;
   border: none;
-  background: #5c005f;
+  background: #c50073;
   border-radius: 5px;
   color: #fff;
   outline: none;
