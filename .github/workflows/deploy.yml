@@ -25,4 +25,5 @@ jobs:
           sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP << 'EOF'
             set -e
             echo "Connected to server"
+            cd /var/www/tictac
           EOF
