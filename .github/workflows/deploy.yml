@@ -23,7 +23,7 @@ jobs:
 
       - name: Deploy to Server
         run: |
-          ssh -o StrictHostKeyChecking=no root@185.65.120.195 << 'EOF'
+          ssh -o StrictHostKeyChecking=no ubuntu@185.65.120.195 << 'EOF'
             set -e
             echo "Connected to server"
             cd /var/www/tictac
