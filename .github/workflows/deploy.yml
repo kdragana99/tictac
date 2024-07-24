@@ -26,7 +26,8 @@ jobs:
             set -e
             echo "Connected to server"
             cd /var/www/tictac
-             git pull origin master
-             sudo systemctl restart nginx
-             echo "Deployed successfully"
+            git fetch origin
+            echo "Fetched latest changes"
+            git reset --hard origin/master
+            echo "Reset to latest master"
           EOF
