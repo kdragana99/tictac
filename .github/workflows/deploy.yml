@@ -13,17 +13,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Check SSH Key
-        run: ssh-add -l
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
 
       - name: Deploy to Server
+        env:
+          SERVER_IP: ${{ secrets.185.65.120.195 }}
+          SERVER_USER: ${{ secrets.ubuntu }}
+          SERVER_PASSWORD: ${{ secrets.YKE%$i7ZAzWTmDK }}
         run: |
-          ssh -o StrictHostKeyChecking=no root@185.65.120.195 << 'EOF'
+          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP << 'EOF'
             set -e
             echo "Connected to server"
             cd /var/www/tictac
