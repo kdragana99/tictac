@@ -26,6 +26,5 @@ jobs:
             set -e
             echo "Connected to server"
             cd /var/www/tictac
-            git reset --hard origin/master
-            echo "Reset to latest master"
+            git pull origin master
           EOF
