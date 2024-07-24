@@ -7,14 +7,21 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: Deploy to Server
         run: |
-          cd /var/www/tictac
-          git fetch origin
-          git reset --hard origin/master
+          ssh -o StrictHostKeyChecking=no root@185.65.120.195 << 'EOF'
+            cd /var/www/tictac
+            git fetch origin
+            git reset --hard origin/master
+          EOF
