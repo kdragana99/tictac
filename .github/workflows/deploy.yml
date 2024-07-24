@@ -18,10 +18,18 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Check SSH Key
+        run: ssh-add -l
+
       - name: Deploy to Server
         run: |
           ssh -o StrictHostKeyChecking=no root@185.65.120.195 << 'EOF'
+            set -e
+            echo "Connected to server"
             cd /var/www/tictac
+            echo "Current directory: $(pwd)"
             git fetch origin
+            echo "Fetched latest changes"
             git reset --hard origin/master
+            echo "Reset to latest master"
           EOF
