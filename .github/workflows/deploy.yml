@@ -25,10 +25,4 @@ jobs:
           sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP << 'EOF'
             set -e
             echo "Connected to server"
-            cd /var/www/tictac
-            echo "Current directory: $(pwd)"
-            git fetch origin
-            echo "Fetched latest changes"
-            git reset --hard origin/master
-            echo "Reset to latest master"
           EOF
