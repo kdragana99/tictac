@@ -26,4 +26,7 @@ jobs:
             set -e
             echo "Connected to server"
             cd /var/www/tictac
+             git pull origin master
+             sudo systemctl restart nginx
+             echo "Deployed successfully"
           EOF
